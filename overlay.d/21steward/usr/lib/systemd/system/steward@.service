@@ -1,0 +1,19 @@
+[Unit]
+Description=Steward Instance - %i
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=/etc/steward/steward-%i.conf
+
+[Service]
+Type=exec
+User=steward
+Group=steward
+Restart=always
+RestartSec=5s
+ExecStart=/usr/bin/steward @/etc/steward/steward-%i.conf
+LimitMEMLOCK=4G
+StandardOutput=journal
+
+
+[Install]
+WantedBy=multi-user.target

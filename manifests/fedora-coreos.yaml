@@ -2,11 +2,11 @@
 # into "official" builds of Fedora CoreOS (such as including `fedora-release-coreos`)
 # or are very "opinionated" like disabling SSH passwords by default.
 
-ref: fedora/${basearch}/coreos/${stream}
+ref: steward/${basearch}/coreos/${stream}
 rojig:
   license: MIT
-  name: fedora-coreos
-  summary: Fedora CoreOS ${stream}
+  name: steward-coreos
+  summary: Steward Fedora CoreOS ${stream}
 
 add-commit-metadata:
   fedora-coreos.stream: ${stream}
@@ -26,6 +26,8 @@ conditional-include:
 
 ostree-layers:
   - overlay/15fcos
+  - overlay/21steward
+  - overlay/22rathole
 
 automatic-version-prefix: "${releasever}.<date:%Y%m%d>.dev"
 mutate-os-release: "${releasever}"

@@ -1,0 +1,20 @@
+[Unit]
+Description=Rathole Service
+After=network.target
+Requires=steward@1.service steward@2.service
+ConditionPathExists=/etc/rathole/rathole.toml
+
+[Service]
+Type=exec
+User=rathole
+Group=rathole
+Restart=always
+RestartSec=5s
+ExecStartPre=/bin/sleep 30
+ExecStart=/usr/bin/rathole /etc/rathole/rathole.toml
+LimitNOFILE=1048576
+LimitMEMLOCK=1G
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
